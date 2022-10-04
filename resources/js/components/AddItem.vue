@@ -27,6 +27,12 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <label for="discount" class="col-md-4 col-form-label text-md-end">Discount (Optional)</label>
+                        <div class="col-md-6">
+                            <input id="discount" type="number" min="1" class="form-control" name="discount" v-model="formData.discount" required autocomplete="discount">
+                        </div>
+                    </div>
 
                     <div class="row mb-3">
                         <div class="col-md-8 offset-md-4">
@@ -58,6 +64,7 @@ export default {
             categories: [],
             formData: {
                 title: '',
+                discount: '',
                 price: '',
                 category_id: ''
             },

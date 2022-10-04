@@ -18,6 +18,7 @@ class CreateItemsTable extends Migration
             $table->string('title');
             $table->string('price');
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('discount')->nullable();
             $table->timestamps();
         });
     }

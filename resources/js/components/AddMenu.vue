@@ -11,6 +11,12 @@
                             <input id="title" type="text" class="form-control" name="title" v-model="title" required autocomplete="title" autofocus>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <label for="discount" class="col-md-4 col-form-label text-md-end">Discount (Optional)</label>
+                        <div class="col-md-6">
+                            <input id="discount" type="number" min="1" class="form-control" name="discount" v-model="discount" required autocomplete="discount">
+                        </div>
+                    </div>
 
                     <div class="row mb-3">
                         <div class="col-md-8 offset-md-4">
@@ -36,6 +42,7 @@ export default {
     data() {
       return {
           title: '',
+          discount: '',
           success: '',
           errors: '',
           loading: false
@@ -47,7 +54,8 @@ export default {
             this.errors = ''
             this.loading = true
             api.post('/add-menu', {
-                title: this.title
+                title: this.title,
+                discount: this.discount,
             })
             .then((res) => {
                 this.success = res.data

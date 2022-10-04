@@ -21,4 +21,12 @@ class Menu extends Model
         return $this->hasMany(Category::class);
     }
 
+    // Get Closest Discount
+    public function getDiscount()
+    {
+        if($this->discount)
+            return $this->discount;
+        else return null;
+    }
+
 }

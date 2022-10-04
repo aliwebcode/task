@@ -4,22 +4,25 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
+// Define Components
 import Home from "../components/Home";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
 import AddMenu from "../components/AddMenu";
 import AddCategory from "../components/AddCategory";
 import AddItem from "../components/AddItem";
+import Menus from "../components/Menus";
 
-function checkIfLogin(to, from, next) {
+// Define Guest Guard
+function shouldGuest(to, from, next) {
     if (localStorage.getItem('token')) {
         next('/');
     } else {
         next();
     }
 }
-
-function guardRoute(to, from, next) {
+// Define Auth Guard
+function shouldAuth(to, from, next) {
     if (localStorage.getItem('token')) {
         next();
     } else {
@@ -29,6 +32,7 @@ function guardRoute(to, from, next) {
     }
 }
 
+// All Routes
 const routes = new VueRouter({
     mode: 'history',
     routes: [
@@ -41,31 +45,36 @@ const routes = new VueRouter({
             path: '/login',
             component: Login,
             name: 'login',
-            beforeEnter: checkIfLogin
+            beforeEnter: shouldGuest
         },
         {
             path: '/register',
             component: Register,
             name: 'register',
-            beforeEnter: checkIfLogin
+            beforeEnter: shouldGuest
         },
         {
             path: '/add-menu',
             component: AddMenu,
             name: 'add_menu',
-            beforeEnter: guardRoute
+            beforeEnter: shouldAuth
         },
         {
             path: '/add-category',
             component: AddCategory,
             name: 'add_category',
-            beforeEnter: guardRoute
+            beforeEnter: shouldAuth
         },
         {
             path: '/add-item',
             component: AddItem,
             name: 'add_item',
-            beforeEnter: guardRoute
+            beforeEnter: shouldAuth
+        },
+        {
+            path: '/menus',
+            component: Menus,
+            name: 'menus'
         }
     ]
 });

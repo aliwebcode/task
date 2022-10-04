@@ -11,7 +11,6 @@
                             <input id="title" type="text" class="form-control" name="title" v-model="formData.title" required autocomplete="title" autofocus>
                         </div>
                     </div>
-
                     <div class="row mb-3">
                         <label for="category" class="col-md-4 col-form-label text-md-end">Parent (Optional)</label>
                         <div class="col-md-6">
@@ -19,6 +18,13 @@
                                 <option value="" disabled>Select Parent</option>
                                 <option v-for="category in categories" :value="category.id">{{ category.title }}</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="discount" class="col-md-4 col-form-label text-md-end">Discount (Optional)</label>
+                        <div class="col-md-6">
+                            <input id="discount" type="number" min="1" class="form-control" name="discount" v-model="formData.discount" required autocomplete="discount">
                         </div>
                     </div>
 
@@ -55,6 +61,7 @@ export default {
             categories: [],
             formData: {
                 title: '',
+                discount: '',
                 parent_id: ''
             },
             success: '',

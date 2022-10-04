@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->foreignId('menu_id')->constrained()->cascadeOnDelete();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('categories')->nullOnDelete();
+            $table->unsignedBigInteger('discount')->nullable();
             $table->timestamps();
         });
     }

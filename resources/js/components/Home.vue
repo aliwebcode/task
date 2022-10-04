@@ -13,6 +13,7 @@
                 <div class="card-body">
                     <router-link class="btn btn-primary mx-1" to="/add-item">Add Item</router-link>
                     <router-link class="btn btn-primary mx-1" to="/add-category">Add Category</router-link>
+                    <router-link class="btn btn-success mx-1" to="/menus">All Menus</router-link>
                 </div>
             </div>
         </div>
@@ -26,7 +27,7 @@ export default {
     mounted() {
         api.get('/get-menus')
         .then((res) => {
-            if(res.data.menus.length == 0) {
+            if(res.data.menu == null) {
                 this.haveMenu = false
             }
         })

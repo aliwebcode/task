@@ -36,6 +36,7 @@ class CategoryController extends Controller
 
         $category = Category::create([
             'title' => $request->data['title'],
+            'discount' => $request->data['discount'],
             'parent_id' => $request->data['parent_id'],
             'menu_id' => $menu->id
         ]);
@@ -46,6 +47,7 @@ class CategoryController extends Controller
         ]);
     }
 
+    // Get Categories To (Add Category Page) And Check if User pre Added Menu
     public function get_categories()
     {
         if(auth()->user()->menu) {
@@ -56,9 +58,13 @@ class CategoryController extends Controller
         }
     }
 
-    public function get_item_categories()
+    // Get Categories By Menu ID
+    public function get_menu_categories($id)
     {
-        $categories = Category::where('menu_id', auth()->user()->menu)->get();
-        return response()->json($categories);
+        $categories = Category::with('menu')
+            ->withCount('items')
+            ->where('menu_id', $id)
+            ->get();
+        return response()->json($categories, 200);
     }
 }
